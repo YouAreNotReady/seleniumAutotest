@@ -13,7 +13,7 @@ driver.maximize_window()
 
 email = driver.find_element(By.NAME, "email")
 password = driver.find_element(By.NAME, "current-password")
-elem = driver.find_element(By.NAME, "current-password")
+
 
 class TestLogin(unittest.TestCase):
 
@@ -55,10 +55,10 @@ class TestLogin(unittest.TestCase):
 	@unittest.expectedFailure
 	def test_05_password_copy_paste(self):
 		driver.get(URL);
-		elem.send_keys("password")
-		elem.send_keys(Keys.CONTROL, 'a') 
-		elem.send_keys(Keys.CONTROL, 'c')
-		elem.send_keys(Keys.CONTROL, 'v') 
+		password.send_keys("password")
+		password.send_keys(Keys.CONTROL, 'a') 
+		password.send_keys(Keys.CONTROL, 'c')
+		password.send_keys(Keys.CONTROL, 'v') 
 		value = password.get_attribute("value")
 		self.assertEqual(value, "passwordpassword")
 
