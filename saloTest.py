@@ -11,11 +11,15 @@ URL = 'https://profile.w3schools.com/log-in'
 driver.get(URL);
 driver.maximize_window()
 
+email = driver.find_element(By.NAME, "email")
+password = driver.find_element(By.NAME, "current-password")
+elem = driver.find_element(By.NAME, "current-password")
+
 class TestLogin(unittest.TestCase):
 
 	def test_01_succesful(self):
-		driver.find_element(By.NAME, "email").send_keys("vovgank@mail.ru")
-		driver.find_element(By.NAME, "current-password").send_keys("abcDEF1!" + Keys.ENTER)
+		email.send_keys("vovgank@mail.ru")
+		password.send_keys("abcDEF1!" + Keys.ENTER)
 		time.sleep(3)
 		RedirectCheck = driver.title
 		self.assertEqual(RedirectCheck, "Home | My learning | W3Schools")
@@ -24,8 +28,8 @@ class TestLogin(unittest.TestCase):
 	@unittest.expectedFailure	
 	def test_02_wrong_email(self):
 		driver.get(URL);
-		driver.find_element(By.NAME, "email").send_keys("vovgank@mail.com")
-		driver.find_element(By.NAME, "current-password").send_keys("abcDEF1!" + Keys.ENTER)
+		email.send_keys("vovgank@mail.com")
+		password.send_keys("abcDEF1!" + Keys.ENTER)
 		time.sleep(3)  
 		RedirectCheck = driver.title
 		self.assertEqual(RedirectCheck, "Home | My learning | W3Schools")
@@ -34,8 +38,8 @@ class TestLogin(unittest.TestCase):
 	@unittest.expectedFailure
 	def test_03_wrong_password(self):
 		driver.get(URL);
-		driver.find_element(By.NAME, "email").send_keys("vovgank@mail.ru")
-		driver.find_element(By.NAME, "current-password").send_keys("1" + Keys.ENTER)
+		email.send_keys("vovgank@mail.ru")
+		password.send_keys("1" + Keys.ENTER)
 		time.sleep(3)  
 		RedirectCheck = driver.title
 		self.assertEqual(RedirectCheck, "Home | My learning | W3Schools")
@@ -51,12 +55,11 @@ class TestLogin(unittest.TestCase):
 	@unittest.expectedFailure
 	def test_05_password_copy_paste(self):
 		driver.get(URL);
-		elem = driver.find_element(By.NAME, "current-password")
 		elem.send_keys("password")
 		elem.send_keys(Keys.CONTROL, 'a') 
 		elem.send_keys(Keys.CONTROL, 'c')
 		elem.send_keys(Keys.CONTROL, 'v') 
-		value = driver.find_element(By.NAME, "current-password").get_attribute("value")
+		value = password.get_attribute("value")
 		self.assertEqual(value, "passwordpassword")
 
 if __name__ == '__main__':
