@@ -19,7 +19,7 @@ class TestLogin(unittest.TestCase):
 
 # 	I have changed my password, this test will not be working anymore
 # 	def test_01_succesful(self):                  
-# 		email.send_keys("vovgank@mail.ru")
+# 		email.send_keys("*")
 # 		password.send_keys("abcDEF1!" + Keys.ENTER)
 # 		time.sleep(3)
 # 		RedirectCheck = driver.title
